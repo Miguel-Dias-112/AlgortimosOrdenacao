@@ -137,6 +137,37 @@ int* mesclavetor(int v1[], int v2[], int n, int n2){
     }
     return vet;
 }
+// implementação do merge sort dada em aula
+void mergeCaniato(int vet[], int inicio, int meio, int fim){
+    int i = inicio, j = meio+1, k = 0;
+    int tamanho = fim-inicio+1;
+    int aux[tamanho];
+    while(i <= meio && j <= fim)
+        if(vet[i] < vet[j])
+            aux[k++] = vet[i++];
+        else
+            aux[k++] = vet[j++];
+    while(i <= meio)
+        aux[k++] = vet[i++];
+    while(j <= fim)
+        aux[k++] = vet[j++];
+    for(i = inicio; i <= fim; i++)
+    vet[i] = aux[i-inicio];
+}
+void auxMergeSortCaniato(int vet[], int inicio, int fim)
+{
+    if(inicio < fim){
+        int meio = (inicio + fim)/2;
+        auxMergeSortCaniato(vet, inicio, meio);
+        auxMergeSortCaniato(vet, meio+1, fim);
+        mergeCaniato(vet, inicio, meio, fim);
+    }
+}
+void mergeSortCaniato(int vet[], int n){
+    auxMergeSortCaniato(vet, 0, n-1);
+}
+////////////////////////
+// implementação do merge sort feita por Miguel, um cado mais simples, porém gastando memoria
 int mergeSort(int vet[], int n){
     if(n == 1){
         return vet[0];
@@ -157,8 +188,6 @@ int mergeSort(int vet[], int n){
         vet[i] = vetm[i];
     }
     return 0;
-   
-   
 }
 int insertionSort(int vet[], int n){
     for (int i = 0; i < n; i++)
