@@ -1,6 +1,8 @@
 
 #ifndef heap_H
 #define heap_H
+#include <iostream>
+using namespace std;
 void heapify(int vet[], int tam, int raiz) {
     int maior = raiz;         // Inicializa o maior como raiz
     int esq = 2 * raiz + 1;   // Esquerda = 2*i + 1
@@ -11,7 +13,7 @@ void heapify(int vet[], int tam, int raiz) {
         maior = esq;
 
     // Verifica se o filho direito é maior que o maior até agora
-    if (dir < tam && vet[dir] > vet[maior])
+    if (dir < tam && vet[dir] > vet[maior] )
         maior = dir;
 
     // Se o maior não for a raiz
@@ -22,8 +24,15 @@ void heapify(int vet[], int tam, int raiz) {
         vet[maior] = aux;
 
         // Recursivamente aplica o heapify na subárvore afetada
-        heapify(vet, tam, maior);
+        heapify(vet, tam, esq);
+        heapify(vet, tam, dir);
     }
+}
+void imprime(int vet[], int n){
+    for (int i = 0; i < n; i++){
+        cout << vet[i] << " ";
+    }
+    cout << endl;
 }
 void BuildHeap(int vet[], int n){
     for (int i = n/2 ; i >= 0; i--){
